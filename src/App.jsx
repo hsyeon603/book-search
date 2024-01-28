@@ -1,36 +1,13 @@
-import { useState, useEffect } from 'react';
-import Book from './components/Book.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './routes/Home.jsx';
+import Detail from './routes/Detail.jsx';
 
-function App() {
-  const [loading, setLoading] = useState(true);
-  const [books, setBooks] = useState([]);
-  const getBooks = async () => {
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=flower`);
-    const json = await response.json();
-    setBooks(json.items);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getBooks();
-  }, []);
-
+export default function App() {
   return (
-    <>
-      {loading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <div>
-          {books.map((book) => {
-            let id = book.id;
-            let { imageLinks, title } = book.volumeInfo;
-            let img = imageLinks.thumbnail ? imageLinks.thumbnail : '';
-            return <Book key={id} title={title} img={img} />;
-          })}
-        </div>
-      )}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
