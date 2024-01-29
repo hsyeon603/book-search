@@ -24,8 +24,10 @@ export default function Home() {
           {books.map((book) => {
             let id = book.id;
             let { imageLinks, title } = book.volumeInfo;
-            let img = imageLinks.thumbnail ? imageLinks.thumbnail : '';
-            return <Book key={id} title={title} img={img} />;
+            let img = imageLinks?.thumbnail
+              ? imageLinks.thumbnail
+              : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019';
+            return <Book key={id} id={id} title={title} img={img} />;
           })}
         </div>
       )}
