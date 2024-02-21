@@ -4,11 +4,14 @@
   margin: 0 5px;
   gap: 1rem;
 
-  @media screen and (min-width: 768px) {
+  @include responsive(T) {
     grid-template-columns: repeat(2, 1fr);
+    margin: 0 30px;
   }
 
-  @media screen and (min-width: 1200px) {
+  @include responsive(D) {
     grid-template-columns: repeat(4, 1fr);
+    column-gap: 80px;
+    row-gap: 50px;
   }
 }

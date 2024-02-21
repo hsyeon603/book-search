@@ -1,19 +1,35 @@
+@import './constants/breakpoints';
+
+@import './base/global';
 @import './base/normalize';
 @import './base/reset';
 @import './base/color';
 @import './base/icon';
 
+@import './mixins/responsive';
+@import './mixins/flexbox';
+
 @import './components/book-list';
+@import './components/book';
 
 * {
   font-family: 'Alegreya Sans', sans-serif;
 }
 
+body {
+  @include responsive(T) {
+    @include flexbox;
+    background-color: $accent;
+  }
+}
+
 #root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @include column-flexbox;
+  background-color: #fff;
+
+  @include responsive(D) {
+    width: 1000px;
+  }
 }
 
 .logo {

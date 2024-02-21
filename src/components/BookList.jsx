@@ -1,4 +1,5 @@
 import Book from '../components/Book.jsx';
+import { refineAuthor } from '../utils/util.js';
 
 export default function BookList({ books, handleScroll }) {
   return (
@@ -7,13 +8,21 @@ export default function BookList({ books, handleScroll }) {
         let id = book.isbn13._cdata;
         let title = book.bookname._cdata;
         let imageURL = book.bookImageURL._cdata;
+        let author = refineAuthor(book.authors._cdata);
+        let publisher = book.publisher._cdata;
+        let publicationYear = book.publication_year._cdata;
+        let ranking = book.ranking._text;
         let isObserveTarget = i === books.length - 2 ? true : false;
         return (
           <Book
             key={id}
             id={id}
+            ranking={ranking}
             title={title}
-            img={imageURL}
+            author={author}
+            imgURL={imageURL}
+            publisher={publisher}
+            publicationYear={publicationYear}
             isObserveTarget={isObserveTarget}
             handleScroll={handleScroll}
           />
