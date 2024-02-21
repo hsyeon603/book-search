@@ -1,41 +1,32 @@
 import { useState, useEffect } from 'react';
 import Search from '../components/Search.jsx';
 import BookList from '../components/BookList.jsx';
-
+import { xml2json } from 'xml-js';
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
-  const [searchWord, setSearchWord] = useState('');
   const [isBottom, setIsBottom] = useState(false);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(1);
 
-  const getBooks = async (word) => {
-    if (word) {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${word}&startIndex=${index}`);
-      const json = await response.json();
-      setBooks((prev) => [...prev, ...json.items]);
-      setLoading(false);
-      setIndex((prev) => (prev += 10));
-      setIsBottom(false);
-    }
-  };
-
-  const drawPage = () => {
-    setLoading(true);
-    // TODO ui 구성 후 loading 상태 변경
+  const getBooks = async () => {
+    const response = await fetch(
+      `http://data4library.kr/api/loanItemSrch?authKey=5a615fb780fec17d6cffaee00487472e711a950d887996a209599630893fd7eb&startDt=2023-09-01&endDt=2023-12-31&addCode=0&pageNo=${index}&pageSize=10`
+    );
+    const text = await response.text();
+    const jsonString = xml2json(text, { compact: true, spaces: 4 });
+    const json = JSON.parse(jsonString);
+    setBooks((prev) => [...prev, ...json.response.docs.doc]);
     setLoading(false);
+    setIndex((prev) => ++prev);
+    setIsBottom(false);
   };
 
   useEffect(() => {
-    drawPage();
-  }, [books]);
+    getBooks();
+  }, []);
 
   useEffect(() => {
-    getBooks(searchWord);
-  }, [searchWord]);
-
-  useEffect(() => {
-    if (isBottom) getBooks(searchWord);
+    if (isBottom) getBooks();
   }, [isBottom]);
 
   return (
@@ -44,7 +35,6 @@ export default function Home() {
         <h1>Loading...</h1>
       ) : (
         <>
-          <Search handleClick={setSearchWord} />
           <BookList books={books} handleScroll={setIsBottom} />
         </>
       )}
