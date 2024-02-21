@@ -12,7 +12,7 @@ export default function Book({ id, img, title, isObserveTarget, handleScroll }) 
 
   useEffect(() => {
     if (isObserveTarget) observer.observe(bookWrapper.current);
-  }, bookWrapper.current);
+  }, [bookWrapper.current]);
 
   return (
     <div ref={bookWrapper}>
