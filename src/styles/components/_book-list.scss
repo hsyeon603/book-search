@@ -1,0 +1,14 @@
+#book-list {
+  display: inline-grid;
+  max-width: 767px;
+  margin: 0 5px;
+  gap: 1rem;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

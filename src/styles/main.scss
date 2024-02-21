@@ -3,6 +3,20 @@
 @import './base/color';
 @import './base/icon';
 
+@import './components/book-list';
+
 * {
   font-family: 'Alegreya Sans', sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  height: 50px;
+  margin: 20px 0;
 }
