@@ -2,19 +2,18 @@ import Book from '../components/Book.jsx';
 
 export default function BookList({ books, handleScroll }) {
   return (
-    <div>
+    <div id="book-list">
       {books.map((book, i) => {
-        let id = book.id;
-        let { imageLinks, title } = book.volumeInfo;
-        let img = imageLinks?.thumbnail;
+        let id = book.isbn13._cdata;
+        let title = book.bookname._cdata;
+        let imageURL = book.bookImageURL._cdata;
         let isObserveTarget = i === books.length - 2 ? true : false;
-        console.log(i, isObserveTarget);
         return (
           <Book
             key={id}
             id={id}
             title={title}
-            img={img}
+            img={imageURL}
             isObserveTarget={isObserveTarget}
             handleScroll={handleScroll}
           />
