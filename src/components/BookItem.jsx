@@ -43,8 +43,14 @@ export default function BookItem({
   );
 }
 
-Book.propTypes = {
+BookItem.propTypes = {
   id: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
+  imgURL: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  publisher: PropTypes.string.isRequired,
+  publicationYear: PropTypes.string.isRequired,
+  ranking: PropTypes.string.isRequired,
+  isObserveTarget: PropTypes.bool.isRequired,
+  handleScroll: PropTypes.func.isRequired,
 };

@@ -1,30 +1,59 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { xml2json } from 'xml-js';
+import { refineAuthor } from '../utils/util.js';
+import DetailItem from '../components/DetailItem.jsx';
 
 export default function Detail() {
-  const [book, setBook] = useState({});
+  const [detail, setDetail] = useState({});
+  const [recommendation, setRecommendation] = useState();
   const { id } = useParams();
-  const getBook = async () => {
-    const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}`);
+
+  const getDetail = async () => {
+    const response = await fetch(
+      `http://data4library.kr/api/srchDtlList?authKey=${
+        import.meta.env.VITE_API_KEY
+      }&isbn13=${id}&loaninfoYN=Y& displayInfo=age`
+    );
+    const text = await response.text();
+    const jsonString = xml2json(text, { compact: true, spaces: 4 });
+    const json = JSON.parse(jsonString).response.detail.book;
+
+    let title = json.bookname._cdata;
+    let imageURL = json.bookImageURL._cdata;
+    let author = refineAuthor(json.authors._cdata);
+    let publisher = json.publisher._cdata;
+    let publicationDate = json.publication_date._cdata;
+    let className = json.class_nm._cdata;
+    let description = json.description._cdata;
+
+    setDetail({ imageURL, title, author, publisher, publicationDate, className, description });
+  };
+
+  const getRecommendation = async () => {
+    const response = await fetch(`
+    http://data4library.kr/api/usageAnalysisList?authKey=${import.meta.env.VITE_API_KEY}&isbn13=${id}&format=json`);
     const json = await response.json();
-    let { imageLinks, title, authors, publisher, publishedDate } = json.volumeInfo;
-    let img = imageLinks?.thumbnail
-      ? imageLinks.thumbnail
-      : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png?20200912122019';
-    setBook({ img, title, authors, publisher, publishedDate });
+
+    setRecommendation(json.response.readerRecBooks);
   };
 
   useEffect(() => {
-    getBook();
+    getDetail();
+    getRecommendation();
   }, []);
 
+  useEffect(() => {}, [recommendation]);
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <img style={{ width: '150px' }} src={book.img} />
-      <span>{book.title}</span>
-      <span>{book.authors}</span>
-      <span>{book.publisher}</span>
-      <span>{book.publishedDate}</span>
-    </div>
+    <DetailItem
+      imageURL={detail.imageURL}
+      className={detail.className}
+      title={detail.title}
+      author={detail.author}
+      publisher={detail.publisher}
+      publicationDate={detail.publicationDate}
+      description={detail.description}
+    />
   );
 }

@@ -1,0 +1,85 @@
+.detail {
+  max-width: 767px;
+  margin: 30px 10px;
+  word-break: keep-all;
+
+  .detail-info {
+    @include flexbox(start, top);
+    margin-bottom: 40px;
+
+    .image {
+      margin-right: 30px;
+    }
+
+    .className {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-bottom: 15px;
+    }
+
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .author {
+      margin-bottom: 5px;
+    }
+
+    .publisher {
+      margin-bottom: 20px;
+    }
+
+    .author,
+    .publisher {
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+
+    .publication-date {
+      font-size: 14px;
+      opacity: 0.6;
+    }
+  }
+
+  section .title {
+    display: block;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    opacity: 0.6;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: rgba(0, 0, 0, 0.5);
+      margin: 10px 0 20px 0;
+    }
+  }
+
+  .detail-description,
+  .detail-others {
+    margin-bottom: 40px;
+  }
+
+  .detail-description {
+    p {
+      font-size: 14px;
+      opacity: 0.8;
+      letter-spacing: 1px;
+      word-spacing: 2px;
+      line-height: 20px;
+    }
+  }
+
+  @include responsive(T) {
+    margin: 30px;
+
+    .detail-info {
+    }
+  }
+}
