@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
 
-export default function Book({
+export default function BookItem({
   id,
   imgURL,
   title,

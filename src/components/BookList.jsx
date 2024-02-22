@@ -1,4 +1,4 @@
-import Book from '../components/Book.jsx';
+import BookItem from './BookItem.jsx';
 import { refineAuthor } from '../utils/util.js';
 
 export default function BookList({ books, handleScroll }) {
@@ -14,7 +14,7 @@ export default function BookList({ books, handleScroll }) {
         let ranking = book.ranking._text;
         let isObserveTarget = i === books.length - 2 ? true : false;
         return (
-          <Book
+          <BookItem
             key={id}
             id={id}
             ranking={ranking}
