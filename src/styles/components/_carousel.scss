@@ -1,0 +1,36 @@
+.carousel {
+  position: relative;
+
+  .carousel-images {
+    display: flex;
+    gap: 15px;
+    overflow-x: scroll;
+
+    .image {
+      object-fit: cover;
+    }
+  }
+
+  .carousel-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+
+    &.left {
+      border-bottom: 20px solid transparent;
+      border-top: 20px solid transparent;
+      border-left: 20px solid transparent;
+      border-right: 20px solid rgba(0, 0, 0, 0.3);
+    }
+    &.right {
+      right: 0;
+      border-bottom: 20px solid transparent;
+      border-top: 20px solid transparent;
+      border-left: 20px solid rgba(0, 0, 0, 0.3);
+      border-right: 20px solidtransparent;
+    }
+  }
+}
