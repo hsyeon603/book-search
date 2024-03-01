@@ -1,6 +1,26 @@
 import PropTypes from 'prop-types';
-
+import Carousel from './Carousel.jsx';
+import { useState, useEffect } from 'react';
 export default function DetailItem({ imageURL, className, title, author, publisher, publicationDate, description }) {
+  const [otherImages, setOtherImages] = useState([]);
+
+  const getOtherBooks = async () => {
+    const response = await fetch(
+      `http://data4library.kr/api/srchBooks?authKey=${
+        import.meta.env.VITE_API_KEY
+      }&author=${author}&pageNo=1&pageSize=10&format=json`
+    );
+
+    const json = await response.json();
+    const images = json.response.docs.map((data) => data.doc.bookImageURL);
+
+    setOtherImages((prev) => images);
+  };
+
+  useEffect(() => {
+    if (author) getOtherBooks();
+  }, [author]);
+
   return (
     <div className="detail">
       <div className="detail-info">
@@ -24,7 +44,7 @@ export default function DetailItem({ imageURL, className, title, author, publish
       </section>
       <section className="detail-others">
         <h2 className="title">저자의 다른 저서</h2>
-        <p>{description}</p>
+        <Carousel urls={otherImages} />
       </section>
       <section className="detail-recommendation">
         <h2 className="title">이 책과 함께 둘러본 책</h2>

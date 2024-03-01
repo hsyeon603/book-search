@@ -29,18 +29,21 @@ export default function Carousel({ urls, size }) {
   };
 
   useEffect(() => {
+    setImageUrls((prev) => urls);
+
     setOffsetWidth((prev) => imagesRef.current.offsetWidth);
     let width = (imagesRef.current.offsetWidth - 15 * 4) / 5;
     setItemWidth((prev) => width);
 
     setOriginLength((prev) => urls.length);
-    let rest = 5 - (urls.length % 5);
-    if (rest !== 5) {
-      let restUrls = urls.slice(0, rest + 5);
-      let newUrls = [...urls, ...restUrls];
-      setImageUrls((prev) => newUrls);
-    }
-  }, [urls[0], imagesRef.current, offsetWidth]);
+
+    // let rest = 5 - (urls.length % 5);
+    // if (rest !== 5) {
+    //   let restUrls = urls.slice(0, rest + 5);
+    //   let newUrls = [...urls, ...restUrls];
+    //   setImageUrls((prev) => newUrls);
+    // }
+  }, [urls, imagesRef.current]);
 
   useEffect(() => {
     slide();
@@ -50,7 +53,7 @@ export default function Carousel({ urls, size }) {
     <div className="carousel">
       <div className="carousel-images" ref={imagesRef}>
         {imageUrls.map((url, i) => (
-          <img className="image" src={url} key={i} index={i} style={{ width: imageWidth + 'px' }} />
+          <img className="image" src={url} key={i} index={i} style={{ minWidth: imageWidth + 'px' }} />
         ))}
       </div>
       <button className="carousel-button left" onClick={slidePrev}></button>

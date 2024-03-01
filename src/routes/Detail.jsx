@@ -35,7 +35,7 @@ export default function Detail() {
     http://data4library.kr/api/usageAnalysisList?authKey=${import.meta.env.VITE_API_KEY}&isbn13=${id}&format=json`);
     const json = await response.json();
 
-    setRecommendation(json.response.readerRecBooks);
+    // setRecommendation(json.response.readerRecBooks);
   };
 
   useEffect(() => {
