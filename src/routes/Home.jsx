@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Search from '../components/Search.jsx';
 import BookList from '../components/BookList.jsx';
 import { xml2json } from 'xml-js';
+import RecommendButton from '../components/RecommendButton.jsx';
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
@@ -37,6 +38,7 @@ export default function Home() {
         <h1>Loading...</h1>
       ) : (
         <>
+          <RecommendButton />
           <BookList books={books} handleScroll={setIsBottom} />
         </>
       )}
