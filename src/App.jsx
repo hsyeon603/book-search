@@ -3,6 +3,7 @@ import Home from './routes/Home.jsx';
 import Detail from './routes/Detail.jsx';
 import './styles/main.scss';
 import Recommend from './routes/Recommend.jsx';
+import logo from './assets/images/logo-color.png';
 
 export default function App() {
   return (
@@ -10,7 +11,7 @@ export default function App() {
       <Router basename="/bookbti">
         <Link to={'/'}>
           <div className="logo-container">
-            <img className="logo" src="./src/assets/images/logo-color.png" />
+            <img className="logo" src={logo} alt="bookbti logo" />
           </div>
         </Link>
         <Routes>
