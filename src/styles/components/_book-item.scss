@@ -73,3 +73,41 @@
     }
   }
 }
+
+.recommend-books {
+  display: flex;
+  margin-bottom: 70px;
+
+  .book.recommend {
+    .book-image {
+      display: block;
+      min-width: 120px;
+      min-height: 160px;
+      margin-right: 0px;
+      object-fit: cover;
+    }
+
+    .book-info {
+      @include column-flexbox;
+      height: 100%;
+      visibility: hidden;
+      position: absolute;
+      z-index: 10;
+      background: $background;
+      opacity: 0.5;
+      color: #fff;
+
+      .title {
+        text-align: center;
+      }
+    }
+
+    &:hover .book-info {
+      visibility: visible;
+    }
+
+    &:not(:last-child) {
+      margin-right: 40px;
+    }
+  }
+}

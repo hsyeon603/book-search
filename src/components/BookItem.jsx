@@ -25,7 +25,7 @@ export default function BookItem({
   }, [bookWrapper.current]);
 
   return (
-    <div ref={bookWrapper} className="book">
+    <div ref={bookWrapper} className={`book ${isObserveTarget ? '' : 'recommend'}`}>
       <Link to={`/book/${id}`}>
         <img src={imgURL} className="book-image" />
         <dl className="book-info">

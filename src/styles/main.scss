@@ -13,7 +13,11 @@
 @import './components/book-list';
 @import './components/book-item';
 @import './components/detail-item';
+
+@import './components/recommend-main';
 @import './components/recommend-button';
+@import './components/recommend-choice';
+@import './components/recommend-result';
 
 * {
   font-family: 'Alegreya Sans', sans-serif;

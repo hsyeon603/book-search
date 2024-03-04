@@ -1,0 +1,76 @@
+.recommend-progress {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .progress-number {
+    display: inline-block;
+    margin-bottom: 5px;
+    font-size: 20px;
+  }
+
+  .progress-bar {
+    height: 30px;
+    margin-bottom: 30px;
+    &.total {
+      width: 90vw;
+      background-color: #000;
+      opacity: 0.2;
+    }
+
+    &.current {
+      position: absolute;
+      width: 100%;
+      background-color: $accent;
+      top: 28px;
+      transition: 0.5s width ease-in;
+    }
+  }
+
+  @include responsive(T) {
+    margin: 0 15px;
+
+    .progress-bar {
+      &.current {
+        top: 28px;
+      }
+    }
+  }
+
+  @include responsive(D) {
+    width: calc(100% - 30px);
+    overflow: hidden;
+  }
+}
+
+.recommend-quotes {
+  font-size: 60px;
+}
+
+.recommend-question {
+  display: inline-block;
+  width: calc(100% - 30px);
+  margin-bottom: 28px;
+  font-size: 30px;
+  white-space: pre-wrap;
+  text-align: center;
+}
+
+.recommend-answer {
+  width: calc(100% - 30px);
+  height: 100px;
+  background: #d5d5d5;
+  border-radius: 10px;
+  color: #000;
+  font-size: 20px;
+  white-space: pre-line;
+
+  &:first-of-type {
+    margin-bottom: 20px;
+  }
+
+  &:last-of-type {
+    margin-bottom: 40px;
+  }
+}

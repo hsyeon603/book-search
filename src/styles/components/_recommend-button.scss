@@ -9,6 +9,8 @@
   border-radius: 3px;
   font-size: 30px;
   color: #fff;
+  line-height: 80px;
+  text-align: center;
 
   @include responsive(T) {
     max-width: 767px;
@@ -16,5 +18,10 @@
 
   @include responsive(D) {
     max-width: 720px;
+  }
+
+  &.start {
+    width: 440px;
+    margin-bottom: 40px;
   }
 }
