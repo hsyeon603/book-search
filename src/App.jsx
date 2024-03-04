@@ -7,10 +7,10 @@ import Recommend from './routes/Recommend.jsx';
 export default function App() {
   return (
     <>
-      <Router>
+      <Router basename="/bookbti">
         <Link to={'/'}>
           <div className="logo-container">
-            <img className="logo" src="/src/assets/images/logo-color.png" />
+            <img className="logo" src="./src/assets/images/logo-color.png" />
           </div>
         </Link>
         <Routes>
